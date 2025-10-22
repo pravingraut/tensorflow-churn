@@ -98,6 +98,7 @@ if __name__ == "__main__":
     df = load_raw()
     df = clean_df(df)
     preprocessor, X, y, num_feats, cat_feats = build_preprocessor(df)
+    df.to_csv(os.path.join(PROCESSED_DIR, 'clean_df.csv'), index=False)
     split_and_save(df, preprocessor)
 
 

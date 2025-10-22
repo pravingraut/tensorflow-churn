@@ -1,4 +1,4 @@
-# src/api/app.py
+# /api/main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
@@ -42,7 +42,7 @@ class Customer(BaseModel):
 def predict(customer: Customer):
     # Convert to DataFrame for transformer
     import pandas as pd
-    data = pd.DataFrame([customer.dict()])
+    data = pd.DataFrame([customer.model_dump()])
     X = preprocessor.transform(data)
     prob = model.predict(X)[0][0]
     return {"churn_probability": float(prob), "will_churn": bool(prob > 0.5)}
